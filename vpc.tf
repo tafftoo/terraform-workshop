@@ -54,3 +54,25 @@ resource "aws_route_table_association" "public" {
     subnet_id = "${aws_subnet.public.id}"
     route_table_id = "${aws_route_table.public.id}"
 }
+
+# Define a Private Subnet
+resource "aws_subnet" "private" {
+
+    vpc_id = "${aws_vpc.my_vpc.id}"
+    cidr_block = "${var.cidr_subnet_private}"
+
+    tags {
+      Name = "Private subnet"
+    }
+}
+
+# Define aanother private subnet for database
+resource "aws_subnet" "database" {
+
+    vpc_id = "${aws_vpc.my_vpc.id}"
+    cidr_block = "${var.cidr_subnet_database}"
+
+    tags {
+      Name = "Database subnet"
+    }
+}
